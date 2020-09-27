@@ -1,0 +1,39 @@
+
+.sidebar{
+    position: absolute;
+    background-color: #222222;
+    width: 200px;
+    height : 50vh;
+    /*height: 92.3354vh; */
+    color: white;
+    border-radius: 2%;
+    left: 0;
+    transform: translateX(-200%);
+    transition: all 650ms ease-out;
+  }
+  .nav-list{
+    list-style-type: none;
+    text-transform: uppercase;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
+  }
+  .nav-item{
+    padding: 20px;
+    margin: 5px;
+  }
+  .nav-item:hover{
+      background-color: grey;
+      color : blue;
+  }
+  
+  .active { 
+    transform: translateX(0);
+  }
+  
+  .nav-link{
+    text-decoration: none;
+    margin-left: 10px;
+    color : #FFFFFF;
+  }
