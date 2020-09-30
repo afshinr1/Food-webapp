@@ -23,6 +23,9 @@ export const useStyles = makeStyles((theme) => {
     inputRoot: {
       color: "inherit",
     },
+    btn: {
+      color: "#FFF",
+    },
     inputInput: {
       padding: theme.spacing(1, 1, 1, 0),
       // vertical padding + font size from searchIcon
@@ -55,6 +58,14 @@ export const useStyles = makeStyles((theme) => {
     },
     loginInput: {
       marginBottom: theme.spacing(2),
+    },
+    signup: {
+      backgroundColor: theme.palette.background.paper,
+      border: "2px solid #000",
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+      width: "300px",
+      height: "400px",
     },
   };
 });

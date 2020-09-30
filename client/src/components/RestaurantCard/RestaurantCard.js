@@ -1,4 +1,4 @@
-import { Card } from '@material-ui/core'
+import { Avatar, Card, CardHeader, IconButton } from '@material-ui/core'
 import React from 'react'
 //import {Link, useHistory} from 'react-router-dom'
 const RestaurantCard = (props) => {
@@ -14,7 +14,6 @@ const RestaurantCard = (props) => {
                   }
                   action={
                     <IconButton aria-label="">
-                      <MoreVertIcon />
                     </IconButton>
                   }
                   title=""

@@ -1,92 +1,141 @@
 import {
-    Button,
-    Fade,
-    FormControl,
-    Input,
-    InputLabel,
-    Modal,
-    Typography,
-  } from "@material-ui/core";
-  import React, { useState } from "react";
-  import "./Header.css";
-  import { useStyles } from "./Headerstyles";
-  import Backdrop from "@material-ui/core/Backdrop";
-  import axios from "axios";
-  
-  function SignupModal(props) {
-    const classes = useStyles();
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-  
-    const validateUser = (e) => {
-      e.preventDefault();
-      axios
-        .get("https://jsonplaceholder.typicode.com/todos?_limit=10")
-        .then((data) => {
-          const temp = {
-            username: "test",
-            password: "test",
-            email: "test@gmail.com",
-            uuid: "123",
-            firstName: "John",
-            lastName: "Smith",
-          }
-          sessionStorage.setItem("user", JSON.stringify(temp));
-          props.handleUser(temp);
-          props.handleLoginClose()
-        });
-    };  
-  
-    return (
-      <Modal
-        className={classes.modal}
-        open={props.openLogin}
-        onClose={() => props.handleLoginClose()}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={props.openLogin}>
-          <div className={classes.paper}>
-            <Typography align="center" variant="subtitle1">
-              LOGIN FORM
-            </Typography>
-            <form className="loginForm" onSubmit={validateUser}>
-              <FormControl margin="normal" required>
-                <InputLabel htmlFor="my-input">Email address</InputLabel>
-                <Input
-                  type="text"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </FormControl>
-              <FormControl required>
-                <InputLabel htmlFor="my-input">Password</InputLabel>
-                <Input
-                  className={classes.loginInput}
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </FormControl>
-              <Button
-                disabled={email && password ? false : true}
-                color="secondary"
-                variant="contained"
-                type='submit'
+  Button,
+  Fade,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  Input,
+  InputLabel,
+  Modal,
+  Radio,
+  RadioGroup,
+  Typography,
+} from "@material-ui/core";
+import React, { useState } from "react";
+import "./Header.css";
+import { useStyles } from "./Headerstyles";
+import Backdrop from "@material-ui/core/Backdrop";
+import axios from "axios";
+
+function SignupModal({ openSignup, handleSignupClose }) {
+  const classes = useStyles();
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+
+  return (
+    <Modal
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      className={classes.modal}
+      open={openSignup}
+      onClose={handleSignupClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <Fade in={openSignup}>
+        <div className={classes.signup}>
+          <Typography align="center" variant="subtitle1">
+            SIGNUP FORM
+          </Typography>
+          <form className="signup-form" onSubmit={() => {}}>
+            <FormControl required>
+              <InputLabel>First name</InputLabel>
+              <Input
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl required>
+              <InputLabel>Last name</InputLabel>
+              <Input
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl required>
+              <InputLabel>Email address</InputLabel>
+              <Input
+                type="text"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl required>
+              <InputLabel>Username</InputLabel>
+              <Input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl required>
+              <InputLabel>Password</InputLabel>
+              <Input
+                className={classes.loginInput}
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </FormControl>
+
+            <FormControl component="fieldset">
+              <FormLabel required component="legend">
+                Role
+              </FormLabel>
+
+              <RadioGroup
+                row
+                aria-label="position"
+                defaultValue="top"
+                onChange={(e) => {
+                  setRole(e.target.value);
+                }}
               >
-                Login
-              </Button>
-            </form>
-          </div>
-        </Fade>
-      </Modal>
-    );
-  }
-  
-export default SignupModal
+                <FormControlLabel
+                  value="customer"
+                  control={<Radio color="secondary" />}
+                  label="Customer"
+                  labelPlacement="start"
+                />
+                <FormControlLabel
+                  value="business"
+                  control={<Radio color="secondary" />}
+                  label="Business"
+                  labelPlacement="start"
+                />
+              </RadioGroup>
+            </FormControl>
+
+            <Button
+              disabled={
+                firstName && lastName && email && username && password && role
+                  ? false
+                  : true
+              }
+              color="secondary"
+              variant="contained"
+              type="submit"
+            >
+              Sign Up
+            </Button>
+          </form>
+        </div>
+      </Fade>
+    </Modal>
+  );
+}
+
+export default SignupModal;

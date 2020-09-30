@@ -12,12 +12,14 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import Sidebar from "../Sidebar/Sidebar";
 import { useStyles } from "./Headerstyles";
+import SignupModal from "./SignupModal";
 
 function Header() {
   const [user, setUser] = useState(null);
   const [openLogin, setOpenLogin] = useState(false);
+  const [openSignup, setOpenSignup] = useState(false);
   const classes = useStyles();
- 
+
   const handleLoginOpen = () => {
     setOpenLogin(true);
   };
@@ -25,16 +27,22 @@ function Header() {
   const handleLoginClose = () => {
     setOpenLogin(false);
   };
+  const handleSignupClose = () => {
+    setOpenSignup(false);
+  };
+  const handleSignupOpen = () => {
+    setOpenSignup(true);
+  };
   const handleUser = (data) => {
     setUser(data);
-  }
-  const handleLogout = (e)=> {
+  };
+  const handleLogout = (e) => {
     sessionStorage.removeItem("user");
     setUser(null);
-  }
+  };
   useEffect(() => {
-    setUser(JSON.parse(sessionStorage.getItem('user')))
-  }, [])
+    setUser(JSON.parse(sessionStorage.getItem("user")));
+  }, []);
 
   return (
     <AppBar position="static" color="primary" className={classes.navbar}>
@@ -59,21 +67,38 @@ function Header() {
           </Grid>
           <Grid container item xs={4} justify="flex-end">
             {user ? (
-              <Button color='secondary' variant="contained" onClick={handleLogout}>
-              Logout
-            </Button>
+              <Button
+                color="secondary"
+                variant="contained"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
             ) : (
               <>
-                <Button variant="outlined" onClick={handleLoginOpen}>
+                <Button
+                  variant="outlined"
+                  onClick={handleLoginOpen}
+                  className={classes.btn}
+                >
                   Login
                 </Button>
                 <LoginModal
-                handleUser={handleUser}
+                  handleUser={handleUser}
                   openLogin={openLogin}
                   handleLoginClose={handleLoginClose}
                 />
+                <SignupModal
+                  handleSignUp={handleUser}
+                  openSignup={openSignup}
+                  handleSignupClose={handleSignupClose}
+                />
 
-                <Button className={classes.buttonPadding} variant="outlined" >
+                <Button
+                  className={`${classes.buttonPadding} ${classes.btn}`}
+                  variant="outlined"
+                  onClick={handleSignupOpen}
+                >
                   Sign up
                 </Button>
               </>

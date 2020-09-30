@@ -30,12 +30,12 @@ function LoginModal(props) {
           uuid: "123",
           firstName: "John",
           lastName: "Smith",
-        }
+        };
         sessionStorage.setItem("user", JSON.stringify(temp));
         props.handleUser(temp);
-        props.handleLoginClose()
+        props.handleLoginClose();
       });
-  };  
+  };
 
   return (
     <Modal
@@ -77,7 +77,7 @@ function LoginModal(props) {
               disabled={email && password ? false : true}
               color="secondary"
               variant="contained"
-              type='submit'
+              type="submit"
             >
               Login
             </Button>

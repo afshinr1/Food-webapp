@@ -2,3 +2,8 @@
     display: flex;
     flex-direction: column;
 }
+
+.signup-form{
+    display: flex;
+    flex-direction: column;
+}
